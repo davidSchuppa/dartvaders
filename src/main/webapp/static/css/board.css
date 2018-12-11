@@ -56,8 +56,12 @@ body {
     background-color: black;
 }
 
-nav .navbar-nav li a{
+a{
     color: white !important;
+}
+
+a.dropdown-item {
+    color: black !important;
 }
 
 #darts-logo {

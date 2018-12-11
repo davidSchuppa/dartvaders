@@ -2,7 +2,6 @@ package com.codecool.dartvaders.ajaxhandler;
 
 import com.codecool.dartvaders.dao.implementation.PlayerDaoJdbc;
 import com.codecool.dartvaders.model.Game;
-import com.codecool.dartvaders.model.GameType;
 import com.codecool.dartvaders.model.Player;
 
 import javax.servlet.ServletException;
@@ -28,5 +27,6 @@ public class CreateGame extends HttpServlet {
         List<Player> players = new ArrayList<>(Arrays.asList(player1, player2));
         int legs = Integer.parseInt(req.getParameter("legs"));
         new Game(legs, players, gameType);
+        resp.sendRedirect("/");
     }
 }
