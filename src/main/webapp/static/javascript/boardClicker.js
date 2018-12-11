@@ -1,5 +1,7 @@
 const logContainer = $("#log");
-const log = (string) => { logContainer.prepend(`${string}<br/>`) }
+const log = (string) => {
+    logContainer.prepend(`${string}<br/>`)
+}
 
 $("#svg").on('click', onHandleClick)
 
@@ -31,12 +33,16 @@ function onHandleClick(event) {
     const width = $("#svg").width();
     const height = $("#svg").height();
 
-    const middle = [width/2, height/2];
+    const middle = [width / 2, height / 2];
 
-    const id = target.attr('id');
+    let id = target.attr('id');
     console.log(id);
-    if(id == 'outer-1') {
-        console.log('!')
-        subtract(1);
+    if (id.indexOf('T') != -1) {
+        let number = id.slice(1);
+        id = parseInt(number) * 3;
+    } else if (id.indexOf('D') != -1) {
+        let number = id.slice(1);
+        id = parseInt(number) * 2;
     }
+    subtract(parseInt(id));
 }
