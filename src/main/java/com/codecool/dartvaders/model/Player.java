@@ -23,6 +23,17 @@ public class Player {
         this.legsWon = legsWon;
     }
 
+    public void setGamesPlayed(int gamesPlayed) {
+        this.gamesPlayed = gamesPlayed;
+    }
+
+    public void setBestOfThree(int bestOfThree) {
+        this.bestOfThree = bestOfThree;
+    }
+
+    public void setWins(int wins) {
+        this.wins = wins;
+    }
 
     public int getScore() {
         return actualScore;
