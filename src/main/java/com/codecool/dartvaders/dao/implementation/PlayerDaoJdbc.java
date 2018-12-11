@@ -5,6 +5,17 @@ import com.codecool.dartvaders.model.Player;
 
 public class PlayerDaoJdbc implements PlayerDao {
 
+    private static PlayerDaoJdbc instance = null;
+
+    private PlayerDaoJdbc() {
+
+    }
+
+    public static PlayerDaoJdbc getInstance() {
+        if (instance == null) instance = new PlayerDaoJdbc();
+        return instance;
+    }
+
     @Override
     public void register(Player player) {
 
@@ -21,7 +32,7 @@ public class PlayerDaoJdbc implements PlayerDao {
     }
 
     @Override
-    public Player getCostumerByUsername(String username) {
+    public Player getPlayerByUsername(String username) {
         return null;
     }
 }

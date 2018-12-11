@@ -7,7 +7,7 @@ public interface PlayerDao {
     void register(Player player);
     boolean isUsernameTaken(String username);
     String getHashByUsername(String username);
-    Player getCostumerByUsername(String username);
+    Player getPlayerByUsername(String username);
 
 
 }

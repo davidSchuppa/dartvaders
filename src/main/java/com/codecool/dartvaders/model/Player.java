@@ -11,6 +11,10 @@ public class Player {
     private int actualScore;
     private int legsWon;
 
+    public Player(String name) {
+        this.name = name;
+    }
+
     public void setActualScore(int actualScore) {
         this.actualScore = actualScore;
     }

@@ -12,9 +12,9 @@ public class Game {
     private int numberOfTriples = 0;
     private int highestTurn;
     private Player winner;
-    private GameType gameType;
+    private String gameType;
 
-    public Game(int legs, List<Player> players, GameType gameType) {
+    public Game(int legs, List<Player> players, String gameType) {
         this.legs = legs;
         this.players = players;
         this.gameType = gameType;
