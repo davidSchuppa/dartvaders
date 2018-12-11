@@ -1,4 +1,4 @@
 package com.codecool.dartvaders.dao;
 
-public interface UserDao {
+public class DbConnection {
 }
