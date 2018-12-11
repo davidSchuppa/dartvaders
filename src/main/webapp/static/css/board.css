@@ -55,3 +55,16 @@
 body {
     background-color: black;
 }
+
+nav .navbar-nav li a{
+    color: white !important;
+}
+
+#darts-logo {
+    max-height: 40px;
+    padding: 0;
+}
+
+.board-row {
+    margin-top: 2%;
+}
