@@ -42,6 +42,7 @@ function countScore(event) {
 }
 
 function substractScore(score){
+    console.log(score);
     let total = parseInt(document.getElementById('total').innerText);
     document.getElementById('total').innerText = total - score;
 }

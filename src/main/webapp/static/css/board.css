@@ -25,6 +25,7 @@
 .board svg {
     height: 500px;
     width: 500px;
+
 }
 
 .table table {
@@ -33,15 +34,24 @@
     margin: 0 0.5%;
     text-align: center;
     width: 49%;
+}
 
 .break {
     background: black;
 }
 
-}
 
 #dartboard #areas g path:hover,
 #dartboard #areas g circle:hover {
     cursor: pointer;
     opacity: 0.6;
+}
+
+#dartboard {
+    background: rgba(255,255,255, 0.4);
+    border-radius: 60%;
+}
+
+body {
+    background-color: black;
 }
