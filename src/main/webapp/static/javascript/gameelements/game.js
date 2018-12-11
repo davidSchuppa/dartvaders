@@ -8,19 +8,21 @@ let game = {
 
 
     setEventListeners: function () {
-        $(".play").click(game.letsPlay);
+        $(".play").click(game.getGameInformation);
     },
 
-    letsPlay: function () {
+    getGameInformation: function () {
         let playerOne = document.getElementById("p1-name").value;
         let playerTwo = document.getElementById("p2-name").value;
         let gametype = document.getElementById("gametype").value;
         let playerOneTable = document.getElementById("p1-score");
         let playerTwoTable = document.getElementById("p2-score");
+        let playerOneToDiv = `<div><h1>${playerOne}</h1></div>`;
+        let playerTwoToDiv = `<div><h1>${playerTwo}</h1></div>`;
+        dom.appendToElement(playerOneTable, playerOneToDiv);
+        dom.appendToElement(playerTwoTable, playerTwoToDiv);
+    }
 
 
-        playerTwoTable.innerText += gametype;
-        playerOneTable.innerText += gametype;
-    },
 
 };

@@ -1,5 +1,5 @@
 function init() {
-    board.addEventListeners();
     game.setEventListeners();
+    board.addEventListeners();
 }
 init();
