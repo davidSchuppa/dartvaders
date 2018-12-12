@@ -60,4 +60,21 @@ public class Game {
     public int getActualLeg() {
         return actualLeg;
     }
+
+    public void setActualLeg(int actualLeg) {
+        this.actualLeg = actualLeg;
+    }
+
+    public void setHighestTurn(int highestTurn) {
+        this.highestTurn = highestTurn;
+    }
+
+
+    public void setNumberOfDoubles(int numberOfDoubles) {
+        this.numberOfDoubles = numberOfDoubles;
+    }
+
+    public void setNumberOfTriples(int numberOfTriples) {
+        this.numberOfTriples = numberOfTriples;
+    }
 }
