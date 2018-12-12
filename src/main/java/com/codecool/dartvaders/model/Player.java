@@ -6,9 +6,9 @@ public class Player {
     private int id;
     private String email;
     private int gamesPlayed;
-    private int bestOfThree;
+    private int bestOfThree = 0;
     private int wins;
-    private int actualScore;
+    private int actualScore = 0;
     private int pointRemaining;
     private int legsWon;
 
@@ -58,5 +58,13 @@ public class Player {
 
     public int getPointRemaining() {
         return pointRemaining;
+    }
+
+    public int getBestOfThree() {
+        return bestOfThree;
+    }
+
+    public int getActualScore() {
+        return actualScore;
     }
 }
