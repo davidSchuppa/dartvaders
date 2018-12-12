@@ -24,7 +24,8 @@ public class MainPage extends HttpServlet {
         Map params = new HashMap<>();
         if (session != null) {
             Game game = (Game) session.getAttribute("game");
-            params.put("players", game.getPlayerList());
+            params.put("playerone", game.getPlayerList().get(0));
+            params.put("playertwo", game.getPlayerList().get(1));
             params.put("game", game);
         }
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());

@@ -70,9 +70,16 @@
         </div>
     </nav>
 
-    <div class="row align-items-center justify-content-center board-row">
-        <div class="col-sm-auto" id="p1-score">
+    <div th:if="${session.game != null}" class="row align-items-center justify-content-center board-row">
+        <div><h1 th:text="'LEG' + ${game.getActualLeg()}">1</h1></div>
+        <div><h2 th:text="'Round ' + ${game.getRound()}">2</h2></div>
+    </div>
 
+    <div class="row align-items-center justify-content-center board-row">
+        <div class="col-sm-auto" id="p1-score" th:if="${session.game != null}">
+            <div><h1 th:text="${playerone.getName()}">Player1</h1></div>
+            <div><h2 th:text="${playerone.getPointRemaining()}">501</h2></div>
+            <!--<div><h2 th:text="${playerone.}" </div>-->
         </div>
         <div class="col-sm-auto">
             <div class="board">
@@ -224,8 +231,9 @@
     </svg>
             </div>
         </div>
-        <div class="col-sm-auto" id="p2-score">
-            <span></span>
+        <div class="col-sm-auto" id="p2-score" th:if="${session.game != null}">
+            <div><h1 th:text="${playertwo.getName()}">Player2</h1></div>
+            <div><h2 th:text="${playertwo.getPointRemaining()}">501</h2></div>
         </div>
     </div>
 </div>
