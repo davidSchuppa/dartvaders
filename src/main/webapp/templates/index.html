@@ -84,7 +84,6 @@
         <div class="col-sm-auto" id="p1" th:if="${session.game != null}">
             <div><h1 th:text="${playerone.getName()}">Player1</h1></div>
             <div><h2 id="p1-score" th:text="${playerone.getPointRemaining()}">501</h2></div>
-            <div><h2 th:text="${playerone.getPointRemaining()}">501</h2></div>
             <div><h3 th:text="'Best of three: ' + ${playerone.getBestOfThree()}"></h3></div>
             <div><h3 th:text="'Actual round: ' + ${playerone.getActualScore()}"></h3></div>
             <div><h4 th:text="'Average per dart: ' + ${playerone.getScorePerDart()}"></h4></div>
@@ -243,7 +242,6 @@
         <div class="col-sm-auto" id="p2" th:if="${session.game != null}">
             <div><h1 th:text="${playertwo.getName()}">Player2</h1></div>
             <div><h2 id="p2-score" th:text="${playertwo.getPointRemaining()}">501</h2></div>
-            <div><h2 th:text="${playertwo.getPointRemaining()}">501</h2></div>
             <div><h3 th:text="'Best of three: ' + ${playertwo.getBestOfThree()}">501</h3></div>
             <div><h3 th:text="'Actual round: ' + ${playertwo.getActualScore()}"></h3></div>
             <div><h4 th:text="'Average per dart: ' + ${playerone.getScorePerDart()}"></h4></div>
