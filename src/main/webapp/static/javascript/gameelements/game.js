@@ -19,8 +19,12 @@ let game = {
         let playerTwoTable = document.getElementById("p2-score");
         let playerOneToDiv = `<div><h1>${playerOne}</h1></div>`;
         let playerTwoToDiv = `<div><h1>${playerTwo}</h1></div>`;
+        let scoreDiv = `<div><h2>${gametype}</h2></div>`;
         dom.appendToElement(playerOneTable, playerOneToDiv);
         dom.appendToElement(playerTwoTable, playerTwoToDiv);
+        dom.appendToElement(playerOneTable, scoreDiv);
+        dom.appendToElement(playerTwoTable, scoreDiv);
+
     }
 
 
