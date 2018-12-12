@@ -15,6 +15,7 @@ let game = {
         let playerOne = document.getElementById("p1-name").value;
         let playerTwo = document.getElementById("p2-name").value;
         let gametype = document.getElementById("gametype").value;
+        let legs = document.getElementById("legs").value;
         let playerOneTable = document.getElementById("p1-score");
         let playerTwoTable = document.getElementById("p2-score");
         let playerOneToDiv = `<div><h1>${playerOne}</h1></div>`;
@@ -24,9 +25,11 @@ let game = {
         dom.appendToElement(playerTwoTable, playerTwoToDiv);
         dom.appendToElement(playerOneTable, scoreDiv);
         dom.appendToElement(playerTwoTable, scoreDiv);
+        game.sendInformation(playerOne, playerTwo, gametype, legs);
+    },
 
+    sendInformation: function (playerOne, playerTwo, gametype, legs) {
+        $.post("/create-game", {playerOne:playerOne, playerTwo:playerTwo, gametype:gametype, legs:legs});
     }
-
-
 
 };
