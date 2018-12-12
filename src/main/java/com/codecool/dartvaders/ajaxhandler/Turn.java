@@ -20,12 +20,10 @@ public class Turn extends HttpServlet {
         HttpSession session = req.getSession(false);
         Game game = (Game) session.getAttribute("game");
         int actualScore = Integer.parseInt(req.getParameter("actualScore"));
-        String turnedPlayerName = req.getParameter("player");
+        Player actualPlayer = game.findByName(req.getParameter("player"));
 
 
-
-
-        game.turn(game.findByName(turnedPlayerName));
+        game.turn(actualPlayer);
     }
 
 }

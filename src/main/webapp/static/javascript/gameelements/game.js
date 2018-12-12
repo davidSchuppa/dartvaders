@@ -43,7 +43,7 @@ let game = {
     },
 
     isThrowValid: function (originalPoints, throwScore) {
-        return (originalPoints - throwScore) >= 2;
+        return (originalPoints - throwScore) >= 2 || (originalPoints - throwScore) == 0;
     },
 
     outOfBoard: function () {
@@ -74,5 +74,17 @@ let game = {
             game._highestTurn = game._turnScore;
         }
     }
+
+    //TODO
+    /**Send to java parameters called:
+     *          actualScore
+     *          bestOfThree
+     *          pointRemaining
+     *          legsWon
+     *          actualLeg
+     *          highestTurn
+     *          numberOfDoubles
+     *          numberOfTriples
+     */
 
 };

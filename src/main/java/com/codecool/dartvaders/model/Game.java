@@ -34,7 +34,11 @@ public class Game {
     }
 
     public void turn(Player player) {
-
+        for (Player listPlayer : players) {
+            if (listPlayer.getName().equals(player.getName())) {
+                listPlayer = player;
+            }
+        }
     }
 
     private boolean checkWin() {
