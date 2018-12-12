@@ -78,4 +78,12 @@ public class Player {
     public int getActualScore() {
         return actualScore;
     }
+
+    public double getScorePerDart() {
+        return scorePerDart;
+    }
+
+    public double getScorePerRound() {
+        return scorePerRound;
+    }
 }
