@@ -94,4 +94,17 @@ let game = {
         }
     }
 
+    //TODO
+    /**Send to java parameters called:
+     *          ACTUAL PLAYER NAME!
+     *          actualScore
+     *          bestOfThree
+     *          pointRemaining
+     *          legsWon
+     *          actualLeg
+     *          highestTurn
+     *          numberOfDoubles
+     *          numberOfTriples
+     */
+
 };
