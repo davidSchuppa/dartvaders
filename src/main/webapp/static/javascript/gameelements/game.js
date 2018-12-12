@@ -25,21 +25,29 @@ let game = {
     },
 
     sendInformation: function (p1Name, p2Name, gametype, legs) {
-        console.log("Here we are");
+        console.log("Game created.");
         $.post("/create-game", {p1Name:p1Name, p2Name:p2Name, gametype:gametype, legs:legs});
     },
 
     registerTurn: function (score) {
         game._turnCounter++;
-        let playerOriginalScore = parseInt(document.getElementById(game._actualPlayer + "-score").innerText);
-        if (game.isThrowValid(playerOriginalScore, score)) {
+        console.log(game._turnCounter);
 
+        let playerOriginalScore = parseInt(document.getElementById(game._actualPlayer + "-score").innerText);
+
+            console.log(playerOriginalScore);
+        if (game.isThrowValid(playerOriginalScore, score)) {
         }
         game.changePlayer();
+        console.log(game._actualPlayer);
     },
 
     isThrowValid: function (originalPoints, throwScore) {
-        return originalPoints - throwScore >= 2;
+        return (originalPoints - throwScore) >= 2 || (originalPoints - throwScore) == 0;
+    },
+
+    outOfBoard: function () {
+        console.log("Throw is out of board");
     },
 
     changePlayer: function () {
@@ -66,5 +74,18 @@ let game = {
             game._highestTurn = game._turnScore;
         }
     }
+
+    //TODO
+    /**Send to java parameters called:
+     *          ACTUAL PLAYER NAME!
+     *          actualScore
+     *          bestOfThree
+     *          pointRemaining
+     *          legsWon
+     *          actualLeg
+     *          highestTurn
+     *          numberOfDoubles
+     *          numberOfTriples
+     */
 
 };
