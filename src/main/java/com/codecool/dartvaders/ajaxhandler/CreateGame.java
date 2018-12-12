@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,7 +27,8 @@ public class CreateGame extends HttpServlet {
         String gameType = req.getParameter("gametype");
         List<Player> players = new ArrayList<>(Arrays.asList(player1, player2));
         int legs = Integer.parseInt(req.getParameter("legs"));
-        new Game(legs, players, gameType);
-        resp.sendRedirect("/");
+        Game game = new Game(legs, players, gameType);
+        HttpSession session = req.getSession(true);
+        session.setAttribute("game", game);
     }
 }

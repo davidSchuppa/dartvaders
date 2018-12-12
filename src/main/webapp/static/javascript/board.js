@@ -33,17 +33,20 @@ let board = {
             default:
                 mod = 1;
         }
-
         return mod * parseInt(id.substr(1));
     },
 
     countScore: function (event) {
         let score = board.getDartValueFromID(event);
         board.substractScore(score);
-
     },
 
     substractScore: function (score) {
         console.log(score);
+        board.sendTurnInformation(score);
     },
+
+    sendTurnInformation: function(score) {
+        $.post("/turn", {actualScore:score});
+    }
 };
