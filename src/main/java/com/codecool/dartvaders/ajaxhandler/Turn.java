@@ -41,6 +41,8 @@ public class Turn extends HttpServlet {
         actualPlayer.setPointRemaining(pointRemaining);
         actualPlayer.setLegsWon(legsWon);
 
+        game.setAverage(actualPlayer);
+
     }
 
 }

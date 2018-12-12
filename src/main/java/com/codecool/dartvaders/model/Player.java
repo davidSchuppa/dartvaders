@@ -12,8 +12,19 @@ public class Player {
     private int pointRemaining;
     private int legsWon;
 
+    private double scorePerDart;
+    private double scorePerRound;
+
     public Player(String name) {
         this.name = name;
+    }
+
+    public void setScorePerRound(double scorePerRound) {
+        this.scorePerRound = scorePerRound;
+    }
+
+    public void setScorePerDart(double scorePerDart) {
+        this.scorePerDart = scorePerDart;
     }
 
     public void setActualScore(int actualScore) {
