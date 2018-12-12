@@ -35,17 +35,21 @@ public class Game {
 
     public void turn() {
         round += 1;
+        changeLeg();
     }
 
     private void changeLeg() {
-        if (checkLegWin()) actualLeg += 1;
+        if (checkLegWin()) {
+            actualLeg += 1;
+            round = 0;
+        }
     }
 
     private boolean checkLegWin() {
         for (Player player : players) {
             if (player.getScore() == 0) {
-                player.setLegsWon(player.getLegsWon() + 1);
                 checkGameWin();
+                player.setLegsWon(player.getLegsWon() + 1);
                 return true;
             }
         }
