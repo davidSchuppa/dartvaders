@@ -39,7 +39,7 @@ let game = {
     },
 
     isThrowValid: function (originalPoints, throwScore) {
-        return originalPoints - throwScore >= 2;
+        return originalPoints - throwScore >= 2 || originalPoints - throwScore == 0;
     },
 
     changePlayer: function () {

@@ -24,7 +24,16 @@ public class Game {
         }
     }
 
-    public void turn() {
+    public Player findByName(String name) {
+        for (Player player : players) {
+            if (player.getName().equals(name)) {
+                return player;
+            }
+        }
+        return null;
+    }
+
+    public void turn(Player player) {
 
     }
 
