@@ -33,20 +33,37 @@ public class Game {
         return null;
     }
 
-    public void turn(Player player) {
-        for (Player listPlayer : players) {
-            if (listPlayer.getName().equals(player.getName())) {
-                listPlayer = player;
+    public void turn() {
+        round += 1;
+    }
+
+    private void changeLeg() {
+        if (checkLegWin()) actualLeg += 1;
+    }
+
+    private boolean checkLegWin() {
+        for (Player player : players) {
+            if (player.getScore() == 0) {
+                player.setLegsWon(player.getLegsWon() + 1);
+                checkGameWin();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void checkGameWin() {
+        if (actualLeg == legs) {
+            for (Player player : players) {
+                if (player.getScore() == 0) {
+                    setWinner(player);
+                }
             }
         }
     }
 
-    private boolean checkWin() {
-        for (Player player : players) {
-            if (player.getScore() == 0)
-                return true;
-        }
-        return false;
+    private void setWinner(Player player) {
+        winner = player;
     }
 
     public List<Player> getPlayerList() {

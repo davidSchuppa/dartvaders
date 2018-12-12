@@ -86,4 +86,8 @@ public class Player {
     public double getScorePerRound() {
         return scorePerRound;
     }
+
+    public int getLegsWon() {
+        return legsWon;
+    }
 }

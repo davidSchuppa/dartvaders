@@ -43,6 +43,10 @@ public class Turn extends HttpServlet {
 
         game.setAverage(actualPlayer);
 
+        if (actualPlayer.equals(game.getPlayerList().get(1))) {
+            game.turn();
+        }
+
     }
 
 }
