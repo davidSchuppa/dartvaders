@@ -54,6 +54,7 @@
 
 body {
     background-color: black;
+    color: white;
 }
 
 a{
@@ -72,3 +73,11 @@ a.dropdown-item {
 .board-row {
     margin-top: 2%;
 }
+
+.modal {
+    color: black;1
+}
+
+/*.navbar-dark .navbar-toggler-icon {*/
+    /*background-image: url("data:image/svg+xml;..");*/
+/*}*/
