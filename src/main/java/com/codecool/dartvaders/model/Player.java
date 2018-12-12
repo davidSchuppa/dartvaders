@@ -38,4 +38,12 @@ public class Player {
     public int getScore() {
         return actualScore;
     }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "name='" + name + '\'' +
+                ", actualScore=" + actualScore +
+                '}';
+    }
 }
