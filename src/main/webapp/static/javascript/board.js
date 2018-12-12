@@ -1,50 +1,61 @@
-function addEventListeners() {
-    let elements = document.querySelectorAll('#dartboard #areas g path, #dartboard #areas g circle, #Bull, #Outer');
-    for (element of elements) {
-        element.addEventListener('click', countScore, event);
-    }
-}
+let board = {
 
-function getId(event) {
-    let id = event.target.getAttribute('id');
-    return id;
-}
+    addEventListeners: function () {
+        let elements = document.querySelectorAll('#dartboard #areas g path, #dartboard #areas g circle, #Bull, #Outer');
+        for (element of elements) {
+            element.addEventListener('click', board.countScore, event);
+        }
+    },
 
-function getDartValueFromID(event) {
-    let id = getId(event);
-    if (!id) return 0;
+    getId: function (event) {
+        let id = event.target.getAttribute('id');
+        return id;
+    },
 
-    if (id == 'Bull') return 50;
-    if (id == 'Outer') return 25;
+    getDartValueFromID: function (event) {
+        let id = board.getId(event);
+        if (!id) {
+            console.log("Throw is out of board");
+            game.outOfBoard();
+            return 0;
+        }
 
-    let mod = 0;
-    switch (id[0]) {
-        case 's':
-            mod = 1;
-            break;
-        case 'd':
-            mod = 2;
-            break;
-        case 't':
-            mod = 3;
-            break;
-        default:
-            mod = 1;
-    }
+        if (id == 'Bull') {
+            game._doubles++;
+            return 50;
+        }
+        if (id == 'Outer') return 25;
 
-    return mod * parseInt(id.substr(1));
-}
+        let mod = 0;
+        switch (id[0]) {
+            case 's':
+                mod = 1;
+                break;
+            case 'd':
+                game._doubles++;
+                mod = 2;
+                break;
+            case 't':
+                game._triples++;
+                mod = 3;
+                break;
+            default:
+                mod = 1;
+        }
+        return mod * parseInt(id.substr(1));
+    },
 
-function countScore(event) {
-    let score = getDartValueFromID(event);
-    substractScore(score);
+    countScore: function (event) {
+        let score = board.getDartValueFromID(event);
+        game.registerTurn(score);
+    },
 
-}
+    substractScore: function (score) {
+        console.log(score);
+        board.sendTurnInformation(score);
+    },
 
-function substractScore(score){
-    let total = parseInt(document.getElementById('total').innerText);
-    document.getElementById('total').innerText = total - score;
-}
-
-
-addEventListeners();
+    // sendTurnInformation: function(score) {
+    //     $.post("/turn", {actualScore:score});
+    // }
+};
