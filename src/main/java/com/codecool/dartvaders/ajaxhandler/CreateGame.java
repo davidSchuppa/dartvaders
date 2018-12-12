@@ -34,5 +34,7 @@ public class CreateGame extends HttpServlet {
         Game game = new Game(legs, players, gameType);
         HttpSession session = req.getSession(true);
         session.setAttribute("game", game);
+        resp.sendRedirect("/");
+
     }
 }

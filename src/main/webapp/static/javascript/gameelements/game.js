@@ -27,7 +27,14 @@ let game = {
 
     sendInformation: function (p1Name, p2Name, gametype, legs) {
         console.log("Game created.");
-        $.post("/create-game", {p1Name: p1Name, p2Name: p2Name, gametype: gametype, legs: legs});
+        // $.post("/create-game", {p1Name: p1Name, p2Name: p2Name, gametype: gametype, legs: legs});
+        $.post('/create-game',
+            {p1Name: p1Name, p2Name: p2Name, gametype: gametype, legs: legs},
+            function () {
+                window.location.href = "index.html";
+            }
+        );
+        // window.location("index.html");
     },
 
     registerTurn: function (score) {
