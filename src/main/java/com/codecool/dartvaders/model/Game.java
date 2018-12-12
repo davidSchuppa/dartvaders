@@ -13,11 +13,15 @@ public class Game {
     private int highestTurn;
     private Player winner;
     private String gameType;
+    private int actualLeg = 1;
 
     public Game(int legs, List<Player> players, String gameType) {
         this.legs = legs;
         this.players = players;
         this.gameType = gameType;
+        for (Player player: players) {
+            player.setPointRemaining(Integer.parseInt(gameType));
+        }
     }
 
     public void turn() {
@@ -34,5 +38,13 @@ public class Game {
 
     public List<Player> getPlayerList() {
         return players;
+    }
+
+    public int getRound() {
+        return round;
+    }
+
+    public int getActualLeg() {
+        return actualLeg;
     }
 }

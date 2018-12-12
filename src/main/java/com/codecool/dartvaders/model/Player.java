@@ -9,6 +9,7 @@ public class Player {
     private int bestOfThree;
     private int wins;
     private int actualScore;
+    private int pointRemaining;
     private int legsWon;
 
     public Player(String name) {
@@ -45,5 +46,17 @@ public class Player {
                 "name='" + name + '\'' +
                 ", actualScore=" + actualScore +
                 '}';
+    }
+
+    public void setPointRemaining(int pointRemaining) {
+        this.pointRemaining = pointRemaining;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPointRemaining() {
+        return pointRemaining;
     }
 }
