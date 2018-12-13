@@ -107,7 +107,7 @@ let game = {
             } else {
                 game._actualPlayer = "p1";
                 game._round++;
-                document.getElementById("game-round").innerText = game._round;
+                document.getElementById("game-round").innerText = "Round: " + game._round;
                 document.getElementById("p2-nameH1").style.color = "white";
                 document.getElementById("p1-nameH1").style.color = "rgb(79, 153, 98)";
                 game.revertTurnStats();
