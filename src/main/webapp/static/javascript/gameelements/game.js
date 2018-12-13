@@ -31,7 +31,7 @@ let game = {
         $.post('/create-game',
             {p1Name: p1Name, p2Name: p2Name, gametype: gametype, legs: legs},
             function () {
-                window.location.href = "index.html";
+                window.location.href = "/";
             }
         );
         // window.location("index.html");
@@ -43,8 +43,10 @@ let game = {
 
         let playerOriginalScore = parseInt(document.getElementById(game._actualPlayer + "-score").innerText);
         let playerScoreDiv = document.getElementById(game._actualPlayer + "-score");
+        let playerActualScore = document.getElementById(game._actualPlayer + "-actualRound");
         if (game.isThrowValid(playerOriginalScore, score)) {
             game._turnScore += score;
+            playerActualScore.innerText = "Actual round: " + game._turnScore;
             console.log("Turn score: " + game._turnScore);
             game._pointRemaining = playerOriginalScore - score;
             playerScoreDiv.innerText = game._pointRemaining;
@@ -54,9 +56,9 @@ let game = {
         }
         game.setHighestTurn();
         game.changePlayer();
-        console.log("Actual player: " + game._actualPlayer);
-        console.log("P1 highest turn: " + game._p1HighestTurn);
-        console.log("P2 highest turn: " + game._p2HighestTurn);
+        // console.log("Actual player: " + game._actualPlayer);
+        // console.log("P1 highest turn: " + game._p1HighestTurn);
+        // console.log("P2 highest turn: " + game._p2HighestTurn);
     },
 
     isThrowValid: function (originalPoints, throwScore) {
@@ -75,9 +77,13 @@ let game = {
         if (game._turnCounter === 3) {
             if (game._actualPlayer === "p1") {
                 game._actualPlayer = "p2";
+                document.getElementById("p1-nameH1").style.color = "white";
+                document.getElementById("p2-nameH1").style.color = "rgb(79, 153, 98)";
                 game.revertTurnStats();
             } else {
                 game._actualPlayer = "p1";
+                document.getElementById("p2-nameH1").style.color = "white";
+                document.getElementById("p1-nameH1").style.color = "rgb(79, 153, 98)";
                 game.revertTurnStats();
             }
         }
@@ -93,10 +99,14 @@ let game = {
         if (game._actualPlayer == "p1") {
             if (game._turnScore > game._p1HighestTurn) {
                 game._p1HighestTurn = game._turnScore;
+                let p1bestOfThree = document.getElementById("p1-bestOf");
+                p1bestOfThree.innerText = "Best of three: " + game._p1HighestTurn;
             }
         } else {
             if (game._turnScore > game._p2HighestTurn) {
                 game._p2HighestTurn = game._turnScore;
+                let p2bestOfThree = document.getElementById("p2-bestOf");
+                p2bestOfThree.innerText = "Best of three: " + game._p2HighestTurn;
             }
         }
     }
