@@ -72,7 +72,7 @@
 
     <div th:if="${session.game != null}" class="row align-items-center justify-content-center board-row">
         <div><h1
-                th:text="'LEG' + ${game.getActualLeg()}">1</h1>
+                th:text="'Leg ' + ${game.getActualLeg()}">1</h1>
             <br/>
             <h3
                     th:text="'Round ' + ${game.getRound()}">2</h3>
@@ -89,6 +89,8 @@
             <div><h2 id="p1-turnscore">0</h2></div>
             <div><h3 id="p1-bestOf" th:text="'Best of three: ' + ${playerone.getBestOfThree()}"></h3></div>
             <div><h3 id="p1-actualRound" th:text="'Actual round: ' + ${playerone.getActualScore()}">0</h3></div>
+            <div><h4 th:text="'Average per dart: ' + ${playerone.getScorePerDart()}"></h4></div>
+            <div><h4 th:text="'Average per round: ' + ${playerone.getScorePerRound()}"></h4></div>
         </div>
         <div class="col-sm-auto">
             <div class="board">
@@ -247,6 +249,8 @@
             <!--<div><h2 id="p2-turnscore">0</h2></div>-->
             <div><h3 id="p2-bestOf" th:text="'Best of three: ' + ${playertwo.getBestOfThree()}">0</h3></div>
             <div><h3 id="p2-actualRound" th:text="'Actual round: ' + ${playertwo.getActualScore()}">0</h3></div>
+            <div><h4 th:text="'Average per dart: ' + ${playerone.getScorePerDart()}"></h4></div>
+            <div><h4 th:text="'Average per round: ' + ${playerone.getScorePerRound()}"></h4></div>
         </div>
     </div>
 </div>

@@ -12,8 +12,8 @@ public class Player {
     private int pointRemaining;
     private int legsWon;
 
-    private double scorePerDart;
-    private double scorePerRound;
+    private double scorePerDart = 0.0d;
+    private double scorePerRound = 0.0d;
 
     public Player(String name) {
         this.name = name;
@@ -77,5 +77,17 @@ public class Player {
 
     public int getActualScore() {
         return actualScore;
+    }
+
+    public double getScorePerDart() {
+        return scorePerDart;
+    }
+
+    public double getScorePerRound() {
+        return scorePerRound;
+    }
+
+    public int getLegsWon() {
+        return legsWon;
     }
 }
