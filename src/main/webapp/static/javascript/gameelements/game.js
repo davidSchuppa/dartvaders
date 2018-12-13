@@ -92,7 +92,7 @@ let game = {
     },
 
     changePlayer: function (originalScore, score) {
-        if (game._turnCounter === 3 || originalScore < score || !game.isThrowValid(originalScore, score)) {
+        if (game._turnCounter === 3 || !game.isThrowValid(originalScore, score)) {
             if (game._actualPlayer === "p1") {
                 game._actualPlayer = "p2";
                 document.getElementById("p1-nameH1").style.color = "white";
