@@ -51,6 +51,11 @@ let game = {
             game._pointRemaining = playerOriginalScore - score;
             playerScoreDiv.innerText = game._pointRemaining;
             if (game.checkWin()) {
+                let winner = document.getElementById(game._actualPlayer + "-win");
+                winner.innerHTML = `<h1>"Winner!!!"</h1>`;
+                setTimeout(function () {
+                    winner.innerHTML = '';
+                }, 1000);
                 console.log(game._actualPlayer + " won");
             }
         }

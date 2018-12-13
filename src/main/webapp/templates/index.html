@@ -26,7 +26,7 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js"
             integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
             crossorigin="anonymous"></script>
@@ -82,6 +82,7 @@
 
     <div class="row align-items-center justify-content-center board-row">
         <div class="col-sm-auto justify-content-center" id="p1" th:if="${session.game != null}">
+            <div id="p1-win"></div>
             <div><h1 id="p1-nameH1" th:text="${playerone.getName()}" style="color: rgb(79, 153, 98)">Player1</h1></div>
             <div><h2 id="p1-score" th:text="${playerone.getPointRemaining()}">501</h2></div>
             <!--<div><h2 th:text="${playerone.}" </div>-->
@@ -241,6 +242,7 @@
             </div>
         </div>
         <div class="col-sm-auto justify-content-center" id="p2" th:if="${session.game != null}">
+            <div id="p2-win"></div>
             <div><h1 id="p2-nameH1" th:text="${playertwo.getName()}">Player2</h1></div>
             <div><h2 id="p2-score" th:text="${playertwo.getPointRemaining()}">501</h2></div>
             <!--<div><h2 th:text="${playertwo.getPointRemaining()}">501</h2></div>-->
