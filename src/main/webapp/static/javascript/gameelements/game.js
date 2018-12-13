@@ -12,6 +12,7 @@ let game = {
     _winner: null,
     _avgPerDart: 0,
     _avgPerRound: 0,
+    _playerTurnOriginalScore: 0,
 
 
     setEventListeners: function () {
@@ -42,7 +43,9 @@ let game = {
     registerTurn: function (score, event) {
         game._turnCounter++;
         // console.log("turn counter: " + game._turnCounter);
-
+        if (game._turnCounter == 1) {
+            game._playerTurnOriginalScore = parseInt(document.getElementById(game._actualPlayer + "-score").innerText);
+        }
         let playerOriginalScore = parseInt(document.getElementById(game._actualPlayer + "-score").innerText);
         let playerScoreDiv = document.getElementById(game._actualPlayer + "-score");
         let playerActualScore = document.getElementById(game._actualPlayer + "-actualRound");
@@ -54,6 +57,7 @@ let game = {
             playerScoreDiv.innerText = game._pointRemaining;
             if (game._turnCounter == 3) {
                 game._round = parseInt(document.getElementById("game-round").innerText.substr(5));
+                game.calculateAndSetAverage();
                 game.saveStats();
             }
             if (game._pointRemaining === 0) {
@@ -61,10 +65,12 @@ let game = {
                     game.saveStats();
                     game.win();
                 } else {
-                    game._pointRemaining = playerOriginalScore;
+                    game._pointRemaining = game._playerTurnOriginalScore;
                 }
             }
             playerScoreDiv.innerText = game._pointRemaining;
+        } else {
+            playerScoreDiv.innerText = game._playerTurnOriginalScore;
         }
         game.setHighestTurn();
         game.changePlayer(playerOriginalScore, score);
@@ -103,7 +109,6 @@ let game = {
     changePlayer: function (originalScore, score) {
         if (game._turnCounter === 3 || !game.isThrowValid(originalScore, score, event)) {
             game._round = parseInt(document.getElementById("game-round").innerText.substr(5));
-            game.calculateAndSetAverage();
             if (game._actualPlayer === "p1") {
                 game._actualPlayer = "p2";
                 document.getElementById("p1-nameH1").style.color = "white";
