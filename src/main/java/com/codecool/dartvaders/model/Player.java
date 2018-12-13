@@ -51,14 +51,6 @@ public class Player {
         return actualScore;
     }
 
-    @Override
-    public String toString() {
-        return "Player{" +
-                "name='" + name + '\'' +
-                ", actualScore=" + actualScore +
-                '}';
-    }
-
     public void setPointRemaining(int pointRemaining) {
         this.pointRemaining = pointRemaining;
     }
@@ -89,5 +81,17 @@ public class Player {
 
     public int getLegsWon() {
         return legsWon;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "name='" + name + '\'' +
+                ", bestOfThree=" + bestOfThree +
+                ", actualScore=" + actualScore +
+                ", pointRemaining=" + pointRemaining +
+                ", scorePerDart=" + scorePerDart +
+                ", scorePerRound=" + scorePerRound +
+                '}';
     }
 }
