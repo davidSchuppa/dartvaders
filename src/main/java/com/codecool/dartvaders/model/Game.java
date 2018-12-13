@@ -1,7 +1,11 @@
 package com.codecool.dartvaders.model;
 
+import javax.swing.text.NumberFormatter;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Game {
 
@@ -10,7 +14,6 @@ public class Game {
     private List<Player> players = new ArrayList<>();
     private int numberOfDoubles = 0;
     private int numberOfTriples = 0;
-    private int highestTurn;
     private Player winner;
     private String gameType;
     private int actualLeg = 1;
@@ -19,7 +22,7 @@ public class Game {
         this.legs = legs;
         this.players = players;
         this.gameType = gameType;
-        for (Player player: players) {
+        for (Player player : players) {
             player.setPointRemaining(Integer.parseInt(gameType));
         }
     }
@@ -66,7 +69,7 @@ public class Game {
         }
     }
 
-    private void setWinner(Player player) {
+    public void setWinner(Player player) {
         winner = player;
     }
 
@@ -86,11 +89,6 @@ public class Game {
         this.actualLeg = actualLeg;
     }
 
-    public void setHighestTurn(int highestTurn) {
-        this.highestTurn = highestTurn;
-    }
-
-
     public void setNumberOfDoubles(int numberOfDoubles) {
         this.numberOfDoubles = numberOfDoubles;
     }
@@ -100,10 +98,29 @@ public class Game {
     }
 
     public void setAverage(Player player) {
-        double averagePerDart = (Integer.parseInt(gameType)-player.getPointRemaining()) / (round*3.0);
-        player.setScorePerDart(averagePerDart);
-        double averagePerRound = (Integer.parseInt(gameType) - player.getPointRemaining()) / (round*1.0);
-        player.setScorePerRound(averagePerRound);
+        double averagePerDart = (((Integer.parseInt(gameType) - player.getPointRemaining()) / round) / 3.0);
+        String avgPerDart = new DecimalFormat("0.#").format(averagePerDart);
+        player.setScorePerDart(Double.parseDouble(avgPerDart));
+        double averagePerRound = averagePerDart * 3.0;
+        String avgPerRound = new DecimalFormat("0.#").format(averagePerRound);
+        player.setScorePerRound(Double.parseDouble(avgPerRound));
     }
 
+    public void setRound(int round) {
+        this.round = round;
+    }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "legs=" + legs +
+                ", round=" + round +
+                ", players=" + players +
+                ", numberOfDoubles=" + numberOfDoubles +
+                ", numberOfTriples=" + numberOfTriples +
+                ", winner=" + winner +
+                ", gameType='" + gameType + '\'' +
+                ", actualLeg=" + actualLeg +
+                '}';
+    }
 }

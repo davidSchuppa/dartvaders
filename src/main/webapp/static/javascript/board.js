@@ -47,7 +47,7 @@ let board = {
 
     countScore: function (event) {
         let score = board.getDartValueFromID(event);
-        game.registerTurn(score);
+        game.registerTurn(score, event);
     },
 
     substractScore: function (score) {

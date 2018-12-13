@@ -21,31 +21,30 @@ public class Turn extends HttpServlet {
 
         Game game = (Game) session.getAttribute("game");
         int actualLeg = Integer.parseInt(req.getParameter("actualLeg"));
-        int highestTurn = Integer.parseInt(req.getParameter("highestTurn"));
         int numberOfDoubles = Integer.parseInt(req.getParameter("numberOfDoubles"));
         int numberOfTriples = Integer.parseInt(req.getParameter("numberOfTriples"));
+        int round = Integer.parseInt(req.getParameter("round"));
 
         Player actualPlayer = game.findByName(req.getParameter("player"));
         int actualScore = Integer.parseInt(req.getParameter("actualScore"));
         int bestOfThree = Integer.parseInt(req.getParameter("bestOfThree"));
         int pointRemaining = Integer.parseInt(req.getParameter("pointRemaining"));
-        int legsWon = Integer.parseInt(req.getParameter("legsWon"));
+//        int legsWon = Integer.parseInt(req.getParameter("legsWon"));
+        Player winner = game.findByName(req.getParameter("winner"));
+        double avgPerDart = Double.parseDouble(req.getParameter("avgPerDart"));
+        double avgPerRound = Double.parseDouble(req.getParameter("avgPerRound"));
 
         game.setActualLeg(actualLeg);
-        game.setHighestTurn(highestTurn);
         game.setNumberOfDoubles(numberOfDoubles);
         game.setNumberOfTriples(numberOfTriples);
+        game.setRound(++round);
+        game.setWinner(winner);
 
         actualPlayer.setActualScore(actualScore);
         actualPlayer.setBestOfThree(bestOfThree);
         actualPlayer.setPointRemaining(pointRemaining);
-        actualPlayer.setLegsWon(legsWon);
-
-        game.setAverage(actualPlayer);
-
-        if (actualPlayer.equals(game.getPlayerList().get(1))) {
-            game.turn();
-        }
+        actualPlayer.setScorePerDart(avgPerDart);
+        actualPlayer.setScorePerRound(avgPerRound);
 
     }
 

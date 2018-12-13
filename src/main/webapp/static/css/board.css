@@ -48,7 +48,7 @@
 }
 
 #dartboard {
-    background: rgba(255,255,255, 0.4);
+    background: #32383e;
     border-radius: 60%;
 }
 
@@ -78,6 +78,16 @@ a.dropdown-item {
     color: black;
 }
 
+@media (min-width: 992px){
+    .navbar li {
+        margin-left : 1em;
+        margin-right : 1em;
+    }
+}
+
+.table-dark {
+    margin-top: 5%;
+}
 /*.navbar-dark .navbar-toggler-icon {*/
     /*background-image: url("data:image/svg+xml;..");*/
 /*}*/
