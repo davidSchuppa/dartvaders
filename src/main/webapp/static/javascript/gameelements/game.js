@@ -81,6 +81,7 @@ let game = {
             winner.innerHTML = '';
         }, 1000);
         console.log(game._actualPlayer + " won");
+        game.newGame();
     },
 
     outOfBoard: function () {
@@ -129,6 +130,27 @@ let game = {
         game._pointRemaining = document.getElementById(game._actualPlayer + "-score");
         game._turnCounter = 0;
         game._turnScore = 0;
+    },
+
+    newGame: function() {
+        game._pointRemaining = document.getElementById("gametype").value;
+        game._turnCounter = 0;
+        game._turnScore = 0;
+        game._round = 1;
+        game._avgPerDart = 0;
+        game._avgPerRound = 0;
+        document.getElementById("p1-bestOf").innerText = "Best of three: 0";
+        document.getElementById("p2-bestOf").innerText = "Best of three: 0";
+        document.getElementById("p1-score").innerText = game._pointRemaining;
+        document.getElementById("p2-score").innerText = game._pointRemaining;
+        document.getElementById("game-round").innerText = "Round: " + game._round;
+        document.getElementById("p1-avgperdart").innerText = "Average per dart: " + game._avgPerDart;
+        document.getElementById("p1-avgperround").innerText = "Average per round: " + game._avgPerRound;
+        document.getElementById("p2-avgperdart").innerText = "Average per dart: " + game._avgPerDart;
+        document.getElementById("p2-avgperround").innerText = "Average per round: " + game._avgPerRound;
+        document.getElementById("p1-actualRound").innerText = "Actual Round: " + game._turnScore;
+        document.getElementById("p2-actualRound").innerText = "Actual Round: " + game._turnScore;
+
     },
 
     setHighestTurn: function () {
