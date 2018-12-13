@@ -2,7 +2,7 @@ let game = {
     _doubles: 0,
     _triples: 0,
     _leg: 0,
-    _round: 0,
+    _round: 1,
     _turnCounter: 0,
     _p1HighestTurn: 0,
     _p2HighestTurn: 0,
@@ -80,6 +80,7 @@ let game = {
 
     changePlayer: function () {
         if (game._turnCounter === 3) {
+
             if (game._actualPlayer === "p1") {
                 game._actualPlayer = "p2";
                 document.getElementById("p1-nameH1").style.color = "white";
@@ -87,6 +88,8 @@ let game = {
                 game.revertTurnStats();
             } else {
                 game._actualPlayer = "p1";
+                game._round++;
+                document.getElementById("game-round").innerText = "Round: " + game._round;
                 document.getElementById("p2-nameH1").style.color = "white";
                 document.getElementById("p1-nameH1").style.color = "rgb(79, 153, 98)";
                 game.revertTurnStats();
