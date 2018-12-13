@@ -1,4 +1,5 @@
 let game = {
+    _clickCounter: 0,
     _doubles: 0,
     _triples: 0,
     _leg: 0,
@@ -10,6 +11,8 @@ let game = {
     _turnScore: 0,
     _pointRemaining: document.getElementById("gametype").value,
     _winner: null,
+    _avgPerDart: 0,
+    _avgPerRound: 0,
 
 
     setEventListeners: function () {
@@ -38,6 +41,7 @@ let game = {
     },
 
     registerTurn: function (score, event) {
+        game._clickCounter++;
         game._turnCounter++;
         console.log("turn counter: " + game._turnCounter);
 
@@ -93,7 +97,9 @@ let game = {
 
     changePlayer: function (originalScore, score) {
         if (game._turnCounter === 3 || !game.isThrowValid(originalScore, score)) {
+            game._round = parseInt(document.getElementById("game-round").innerText.substr(6));
             game.saveStats();
+            game.calculateAndSetAverage();
             if (game._actualPlayer === "p1") {
                 game._actualPlayer = "p2";
                 document.getElementById("p1-nameH1").style.color = "white";
@@ -108,6 +114,15 @@ let game = {
                 game.revertTurnStats();
             }
         }
+    },
+
+    calculateAndSetAverage: function () {
+        let playerOriginalAvgPerDart = document.getElementById(game._actualPlayer + "-avgperdart");
+        let playerOriginalAvgPerRound = document.getElementById(game._actualPlayer + "-avgperround");
+        game._avgPerDart = (((document.getElementById("gametype").value - game._pointRemaining) * 1.0 / game._round )/3).toFixed(1);
+        game._avgPerRound = (game._avgPerDart * 3).toFixed(1);
+        playerOriginalAvgPerDart.innerText = "Average per dart: " + game._avgPerDart;
+        playerOriginalAvgPerRound.innerText = "Average per round: " + game._avgPerRound;
     },
 
     revertTurnStats: function () {
