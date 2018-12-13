@@ -1,7 +1,7 @@
 let board = {
 
     addEventListeners: function () {
-        let elements = document.querySelectorAll('#dartboard #areas g path, #dartboard #areas g circle, #Bull, #Outer');
+        let elements = document.querySelectorAll('#dartboard #areas g path, #dartboard #areas g circle, #Bull, #Outer, #board');
         for (element of elements) {
             element.addEventListener('click', board.countScore, event);
         }
@@ -14,9 +14,16 @@ let board = {
 
     getDartValueFromID: function (event) {
         let id = board.getId(event);
-        if (!id) return 0;
+        if (!id) {
+            console.log("Throw is out of board");
+            game.outOfBoard();
+            return 0;
+        }
 
-        if (id == 'Bull') return 50;
+        if (id == 'Bull') {
+            game._doubles++;
+            return 50;
+        }
         if (id == 'Outer') return 25;
 
         let mod = 0;
@@ -25,9 +32,11 @@ let board = {
                 mod = 1;
                 break;
             case 'd':
+                game._doubles++;
                 mod = 2;
                 break;
             case 't':
+                game._triples++;
                 mod = 3;
                 break;
             default:
@@ -38,7 +47,7 @@ let board = {
 
     countScore: function (event) {
         let score = board.getDartValueFromID(event);
-        board.substractScore(score);
+        game.registerTurn(score, event);
     },
 
     substractScore: function (score) {
@@ -46,7 +55,7 @@ let board = {
         board.sendTurnInformation(score);
     },
 
-    sendTurnInformation: function(score) {
-        $.post("/turn", {actualScore:score});
-    }
+    // sendTurnInformation: function(score) {
+    //     $.post("/turn", {actualScore:score});
+    // }
 };

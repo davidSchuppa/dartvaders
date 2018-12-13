@@ -1,9 +1,14 @@
 let game = {
     _doubles: 0,
     _triples: 0,
-    _highestTurn: 0,
     _leg: 0,
-    _round: 0,
+    _round: 1,
+    _turnCounter: 0,
+    _p1HighestTurn: 0,
+    _p2HighestTurn: 0,
+    _actualPlayer: "p1",
+    _turnScore: 0,
+    _pointRemaining: document.getElementById("gametype").value,
     _winner: null,
 
 
@@ -12,24 +17,131 @@ let game = {
     },
 
     getGameInformation: function () {
-        let playerOne = document.getElementById("p1-name").value;
-        let playerTwo = document.getElementById("p2-name").value;
+        let p1Name = document.getElementById("p1-name").value;
+        let p2Name = document.getElementById("p2-name").value;
         let gametype = document.getElementById("gametype").value;
         let legs = document.getElementById("legs").value;
-        let playerOneTable = document.getElementById("p1-score");
-        let playerTwoTable = document.getElementById("p2-score");
-        let playerOneToDiv = `<div><h1>${playerOne}</h1></div>`;
-        let playerTwoToDiv = `<div><h1>${playerTwo}</h1></div>`;
-        let scoreDiv = `<div><h2>${gametype}</h2></div>`;
-        dom.appendToElement(playerOneTable, playerOneToDiv);
-        dom.appendToElement(playerTwoTable, playerTwoToDiv);
-        dom.appendToElement(playerOneTable, scoreDiv);
-        dom.appendToElement(playerTwoTable, scoreDiv);
-        game.sendInformation(playerOne, playerTwo, gametype, legs);
+
+        game.sendInformation(p1Name, p2Name, gametype, legs);
     },
 
-    sendInformation: function (playerOne, playerTwo, gametype, legs) {
-        $.post("/create-game", {playerOne:playerOne, playerTwo:playerTwo, gametype:gametype, legs:legs});
+    sendInformation: function (p1Name, p2Name, gametype, legs) {
+        console.log("Game created.");
+        // $.post("/create-game", {p1Name: p1Name, p2Name: p2Name, gametype: gametype, legs: legs});
+        $.post('/create-game',
+            {p1Name: p1Name, p2Name: p2Name, gametype: gametype, legs: legs},
+            function () {
+                window.location.href = "/";
+            }
+        );
+        // window.location("index.html");
+    },
+
+    registerTurn: function (score, event) {
+        game._turnCounter++;
+        console.log("turn counter: " + game._turnCounter);
+
+        let playerOriginalScore = parseInt(document.getElementById(game._actualPlayer + "-score").innerText);
+        let playerScoreDiv = document.getElementById(game._actualPlayer + "-score");
+        let playerActualScore = document.getElementById(game._actualPlayer + "-actualRound");
+        if (game.isThrowValid(playerOriginalScore, score)) {
+            game._turnScore += score;
+            playerActualScore.innerText = "Actual round: " + game._turnScore;
+            console.log("Turn score: " + game._turnScore);
+            game._pointRemaining = playerOriginalScore - score;
+            playerScoreDiv.innerText = game._pointRemaining;
+            if (game._pointRemaining === 0) {
+                if (game.checkWin(event)) {
+                    game.win();
+                } else {
+                    game._pointRemaining = playerOriginalScore;
+                }
+            }
+            playerScoreDiv.innerText = game._pointRemaining;
+        }
+        game.setHighestTurn();
+        game.changePlayer(playerOriginalScore, score);
+        // console.log("Actual player: " + game._actualPlayer);
+        // console.log("P1 highest turn: " + game._p1HighestTurn);
+        // console.log("P2 highest turn: " + game._p2HighestTurn);
+    },
+
+    isThrowValid: function (originalPoints, throwScore) {
+        return (originalPoints - throwScore) >= 2 || (originalPoints - throwScore == 0);
+    },
+
+    win: function () {
+        let winner = document.getElementById(game._actualPlayer + "-win");
+        winner.innerHTML = `<h1>"Winner!!!"</h1>`;
+        setTimeout(function () {
+            winner.innerHTML = '';
+        }, 1000);
+        console.log(game._actualPlayer + " won");
+    },
+
+    outOfBoard: function () {
+        console.log("Throw is out of board");
+    },
+
+    checkWin: function (event) {
+        let id = board.getId(event);
+        if (id[0] == 'd' && game._pointRemaining === 0) {
+            return true;
+        }
+        return false;
+    },
+
+    changePlayer: function (originalScore, score) {
+        if (game._turnCounter === 3 || !game.isThrowValid(originalScore, score)) {
+            if (game._actualPlayer === "p1") {
+                game._actualPlayer = "p2";
+                document.getElementById("p1-nameH1").style.color = "white";
+                document.getElementById("p2-nameH1").style.color = "rgb(79, 153, 98)";
+                game.revertTurnStats();
+            } else {
+                game._actualPlayer = "p1";
+                game._round++;
+                document.getElementById("game-round").innerText = "Round: " + game._round;
+                document.getElementById("p2-nameH1").style.color = "white";
+                document.getElementById("p1-nameH1").style.color = "rgb(79, 153, 98)";
+                game.revertTurnStats();
+            }
+        }
+    },
+
+    revertTurnStats: function () {
+        game._pointRemaining = document.getElementById(game._actualPlayer + "-score");
+        game._turnCounter = 0;
+        game._turnScore = 0;
+    },
+
+    setHighestTurn: function () {
+        if (game._actualPlayer == "p1") {
+            if (game._turnScore > game._p1HighestTurn) {
+                game._p1HighestTurn = game._turnScore;
+                let p1bestOfThree = document.getElementById("p1-bestOf");
+                p1bestOfThree.innerText = "Best of three: " + game._p1HighestTurn;
+            }
+        } else {
+            if (game._turnScore > game._p2HighestTurn) {
+                game._p2HighestTurn = game._turnScore;
+                let p2bestOfThree = document.getElementById("p2-bestOf");
+                p2bestOfThree.innerText = "Best of three: " + game._p2HighestTurn;
+            }
+        }
     }
+
+    //TODO
+    /**Send to java parameters called:
+     *          ACTUAL PLAYER NAME!
+     *          actualScore
+     *          bestOfThree
+     *          pointRemaining
+     *          legsWon
+     *          actualLeg
+     *          highestTurn
+     *          numberOfDoubles
+     *          numberOfTriples
+     */
 
 };
