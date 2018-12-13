@@ -1,7 +1,7 @@
 let board = {
 
     addEventListeners: function () {
-        let elements = document.querySelectorAll('#dartboard #areas g path, #dartboard #areas g circle, #Bull, #Outer');
+        let elements = document.querySelectorAll('#dartboard #areas g path, #dartboard #areas g circle, #Bull, #Outer, #board');
         for (element of elements) {
             element.addEventListener('click', board.countScore, event);
         }

@@ -81,11 +81,14 @@
 
 
     <div class="row align-items-center justify-content-center board-row">
-        <div class="col-sm-auto" id="p1" th:if="${session.game != null}">
-            <div><h1 th:text="${playerone.getName()}">Player1</h1></div>
+        <div class="col-sm-auto justify-content-center" id="p1" th:if="${session.game != null}">
+            <div><h1 id="p1-nameH1" th:text="${playerone.getName()}" style="color: rgb(79, 153, 98)">Player1</h1></div>
             <div><h2 id="p1-score" th:text="${playerone.getPointRemaining()}">501</h2></div>
-            <div><h3 th:text="'Best of three: ' + ${playerone.getBestOfThree()}"></h3></div>
-            <div><h3 th:text="'Actual round: ' + ${playerone.getActualScore()}"></h3></div>
+            <!--<div><h2 th:text="${playerone.}" </div>-->
+            <!--<div><h2 th:text="${playerone.getPointRemaining()}">501</h2></div>-->
+            <div><h2 id="p1-turnscore">0</h2></div>
+            <div><h3 id="p1-bestOf" th:text="'Best of three: ' + ${playerone.getBestOfThree()}"></h3></div>
+            <div><h3 id="p1-actualRound" th:text="'Actual round: ' + ${playerone.getActualScore()}">0</h3></div>
             <div><h4 th:text="'Average per dart: ' + ${playerone.getScorePerDart()}"></h4></div>
             <div><h4 th:text="'Average per round: ' + ${playerone.getScorePerRound()}"></h4></div>
         </div>
@@ -239,11 +242,13 @@
     </svg>
             </div>
         </div>
-        <div class="col-sm-auto" id="p2" th:if="${session.game != null}">
-            <div><h1 th:text="${playertwo.getName()}">Player2</h1></div>
+        <div class="col-sm-auto justify-content-center" id="p2" th:if="${session.game != null}">
+            <div><h1 id="p2-nameH1" th:text="${playertwo.getName()}">Player2</h1></div>
             <div><h2 id="p2-score" th:text="${playertwo.getPointRemaining()}">501</h2></div>
-            <div><h3 th:text="'Best of three: ' + ${playertwo.getBestOfThree()}">501</h3></div>
-            <div><h3 th:text="'Actual round: ' + ${playertwo.getActualScore()}"></h3></div>
+            <!--<div><h2 th:text="${playertwo.getPointRemaining()}">501</h2></div>-->
+            <!--<div><h2 id="p2-turnscore">0</h2></div>-->
+            <div><h3 id="p2-bestOf" th:text="'Best of three: ' + ${playertwo.getBestOfThree()}">0</h3></div>
+            <div><h3 id="p2-actualRound" th:text="'Actual round: ' + ${playertwo.getActualScore()}">0</h3></div>
             <div><h4 th:text="'Average per dart: ' + ${playerone.getScorePerDart()}"></h4></div>
             <div><h4 th:text="'Average per round: ' + ${playerone.getScorePerRound()}"></h4></div>
         </div>
