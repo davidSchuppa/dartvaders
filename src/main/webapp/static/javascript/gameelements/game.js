@@ -39,15 +39,15 @@ let game = {
 
     registerTurn: function (score, event) {
         game._turnCounter++;
-        console.log("turn counter: " + game._turnCounter);
+        // console.log("turn counter: " + game._turnCounter);
 
         let playerOriginalScore = parseInt(document.getElementById(game._actualPlayer + "-score").innerText);
         let playerScoreDiv = document.getElementById(game._actualPlayer + "-score");
         let playerActualScore = document.getElementById(game._actualPlayer + "-actualRound");
         if (game.isThrowValid(playerOriginalScore, score)) {
             game._turnScore += score;
-            playerActualScore.innerText = "Actual round: " + game._turnScore;
-            console.log("Turn score: " + game._turnScore);
+            playerActualScore.innerText = game._turnScore;
+            // console.log("Turn score: " + game._turnScore);
             game._pointRemaining = playerOriginalScore - score;
             playerScoreDiv.innerText = game._pointRemaining;
             if (game._pointRemaining === 0) {
@@ -76,7 +76,7 @@ let game = {
         setTimeout(function () {
             winner.innerHTML = '';
         }, 1000);
-        console.log(game._actualPlayer + " won");
+        // console.log(game._actualPlayer + " won");
     },
 
     outOfBoard: function () {
@@ -101,7 +101,7 @@ let game = {
             } else {
                 game._actualPlayer = "p1";
                 game._round++;
-                document.getElementById("game-round").innerText = "Round: " + game._round;
+                document.getElementById("game-round").innerText = game._round;
                 document.getElementById("p2-nameH1").style.color = "white";
                 document.getElementById("p1-nameH1").style.color = "rgb(79, 153, 98)";
                 game.revertTurnStats();
@@ -120,13 +120,13 @@ let game = {
             if (game._turnScore > game._p1HighestTurn) {
                 game._p1HighestTurn = game._turnScore;
                 let p1bestOfThree = document.getElementById("p1-bestOf");
-                p1bestOfThree.innerText = "Best of three: " + game._p1HighestTurn;
+                p1bestOfThree.innerText = game._p1HighestTurn;
             }
         } else {
             if (game._turnScore > game._p2HighestTurn) {
                 game._p2HighestTurn = game._turnScore;
                 let p2bestOfThree = document.getElementById("p2-bestOf");
-                p2bestOfThree.innerText = "Best of three: " + game._p2HighestTurn;
+                p2bestOfThree.innerText = game._p2HighestTurn;
             }
         }
     }
