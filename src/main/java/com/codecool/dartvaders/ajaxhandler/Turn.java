@@ -30,6 +30,7 @@ public class Turn extends HttpServlet {
         int bestOfThree = Integer.parseInt(req.getParameter("bestOfThree"));
         int pointRemaining = Integer.parseInt(req.getParameter("pointRemaining"));
 //        int legsWon = Integer.parseInt(req.getParameter("legsWon"));
+        Player winner = game.findByName(req.getParameter("winner"));
 
 //        game.setActualLeg(actualLeg);
 //        game.setHighestTurn(highestTurn);

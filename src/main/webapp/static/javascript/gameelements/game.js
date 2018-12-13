@@ -177,13 +177,16 @@ let game = {
         } else {
             bestOfThree = game._p2HighestTurn;
         }
+        if (game.checkWin(event)) {
+            game._winner = playerName;
+        }
         $.post('/turn', {
             player: playerName,
             actualScore: game._turnScore,
             bestOfThree: bestOfThree,
             pointRemaining: game._pointRemaining,
             numberOfDoubles: game._doubles,
-            numberOfTriples: game._triples
+            numberOfTriples: game._triples,
         })
     }
 
