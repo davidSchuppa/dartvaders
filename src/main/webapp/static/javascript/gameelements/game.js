@@ -2,7 +2,7 @@ let game = {
     _clickCounter: 0,
     _doubles: 0,
     _triples: 0,
-    _leg: 0,
+    _leg: 1,
     _round: 1,
     _turnCounter: 0,
     _p1HighestTurn: 0,
@@ -99,8 +99,8 @@ let game = {
     changePlayer: function (originalScore, score) {
         if (game._turnCounter === 3 || !game.isThrowValid(originalScore, score)) {
             game._round = parseInt(document.getElementById("game-round").innerText.substr(6));
-            game.saveStats();
             game.calculateAndSetAverage();
+            game.saveStats();
             if (game._actualPlayer === "p1") {
                 game._actualPlayer = "p2";
                 document.getElementById("p1-nameH1").style.color = "white";
@@ -139,8 +139,10 @@ let game = {
         game._round = 1;
         game._avgPerDart = 0;
         game._avgPerRound = 0;
-        document.getElementById("p1-bestOf").innerText = "0";
-        document.getElementById("p2-bestOf").innerText = "0";
+        game._p1HighestTurn = 0;
+        game._p2HighestTurn = 0;
+        document.getElementById("p1-bestOf").innerText = game._p1HighestTurn;
+        document.getElementById("p2-bestOf").innerText = game._p2HighestTurn;
         document.getElementById("p1-score").innerText = game._pointRemaining;
         document.getElementById("p2-score").innerText = game._pointRemaining;
         document.getElementById("game-round").innerText = "Round: " + game._round;
@@ -188,7 +190,10 @@ let game = {
             pointRemaining: game._pointRemaining,
             numberOfDoubles: game._doubles,
             numberOfTriples: game._triples,
-            winner: game._winner
+            winner: game._winner,
+            actualLeg: game._leg,
+            avgPerDart: game._avgPerDart,
+            avgPerRound: game._avgPerRound
         })
     }
 
