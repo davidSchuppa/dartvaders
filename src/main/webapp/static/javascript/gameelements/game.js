@@ -170,7 +170,7 @@ let game = {
     },
 
     saveStats: function () {
-        let playerName = document.getElementById(game._actualPlayer + "-nameH1").innerText;
+        let playerName = document.getElementById(game._actualPlayer + "-nameH1").value;
         let bestOfThree;
         if (game._actualPlayer == "p1") {
             bestOfThree = game._p1HighestTurn;
