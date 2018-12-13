@@ -37,30 +37,31 @@ let game = {
         // window.location("index.html");
     },
 
-    registerTurn: function (score) {
+    registerTurn: function (score, event) {
         game._turnCounter++;
         console.log("turn counter: " + game._turnCounter);
 
         let playerOriginalScore = parseInt(document.getElementById(game._actualPlayer + "-score").innerText);
         let playerScoreDiv = document.getElementById(game._actualPlayer + "-score");
         let playerActualScore = document.getElementById(game._actualPlayer + "-actualRound");
+
         if (game.isThrowValid(playerOriginalScore, score)) {
             game._turnScore += score;
             playerActualScore.innerText = "Actual round: " + game._turnScore;
             console.log("Turn score: " + game._turnScore);
             game._pointRemaining = playerOriginalScore - score;
             playerScoreDiv.innerText = game._pointRemaining;
-            if (game.checkWin()) {
-                let winner = document.getElementById(game._actualPlayer + "-win");
-                winner.innerHTML = `<h1>"Winner!!!"</h1>`;
-                setTimeout(function () {
-                    winner.innerHTML = '';
-                }, 1000);
-                console.log(game._actualPlayer + " won");
+            if (game._pointRemaining === 0) {
+                if (game.checkWin(event)) {
+                    game.win();
+                } else {
+                    game._pointRemaining = playerOriginalScore;
+                }
             }
+            playerScoreDiv.innerText = game._pointRemaining;
         }
         game.setHighestTurn();
-        game.changePlayer();
+        game.changePlayer(playerOriginalScore, score);
         // console.log("Actual player: " + game._actualPlayer);
         // console.log("P1 highest turn: " + game._p1HighestTurn);
         // console.log("P2 highest turn: " + game._p2HighestTurn);
@@ -70,17 +71,29 @@ let game = {
         return (originalPoints - throwScore) >= 2 || (originalPoints - throwScore == 0);
     },
 
+    win: function () {
+        let winner = document.getElementById(game._actualPlayer + "-win");
+        winner.innerHTML = `<h1>"Winner!!!"</h1>`;
+        setTimeout(function () {
+            winner.innerHTML = '';
+        }, 1000);
+        console.log(game._actualPlayer + " won");
+    },
+
     outOfBoard: function () {
         console.log("Throw is out of board");
     },
 
-    checkWin: function () {
-        return game._pointRemaining === 0;
+    checkWin: function (event) {
+        let id = board.getId(event);
+        if (id[0] == 'd' && game._pointRemaining === 0) {
+            return true;
+        }
+        return false;
     },
 
-    changePlayer: function () {
-        if (game._turnCounter === 3) {
-
+    changePlayer: function (originalScore, score) {
+        if (game._turnCounter === 3 || originalScore < score) {
             if (game._actualPlayer === "p1") {
                 game._actualPlayer = "p2";
                 document.getElementById("p1-nameH1").style.color = "white";
