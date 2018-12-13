@@ -44,7 +44,6 @@ let game = {
         let playerOriginalScore = parseInt(document.getElementById(game._actualPlayer + "-score").innerText);
         let playerScoreDiv = document.getElementById(game._actualPlayer + "-score");
         let playerActualScore = document.getElementById(game._actualPlayer + "-actualRound");
-
         if (game.isThrowValid(playerOriginalScore, score)) {
             game._turnScore += score;
             playerActualScore.innerText = "Actual round: " + game._turnScore;
@@ -93,7 +92,7 @@ let game = {
     },
 
     changePlayer: function (originalScore, score) {
-        if (game._turnCounter === 3 || originalScore < score) {
+        if (game._turnCounter === 3 || originalScore < score || !game.isThrowValid(originalScore, score)) {
             if (game._actualPlayer === "p1") {
                 game._actualPlayer = "p2";
                 document.getElementById("p1-nameH1").style.color = "white";
