@@ -1,7 +1,11 @@
 package com.codecool.dartvaders.model;
 
+import javax.swing.text.NumberFormatter;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Game {
 
@@ -19,7 +23,7 @@ public class Game {
         this.legs = legs;
         this.players = players;
         this.gameType = gameType;
-        for (Player player: players) {
+        for (Player player : players) {
             player.setPointRemaining(Integer.parseInt(gameType));
         }
     }
@@ -100,10 +104,12 @@ public class Game {
     }
 
     public void setAverage(Player player) {
-        double averagePerDart = (Integer.parseInt(gameType)-player.getPointRemaining()) / (round*3.0);
-        player.setScorePerDart(averagePerDart);
-        double averagePerRound = (Integer.parseInt(gameType) - player.getPointRemaining()) / (round*1.0);
-        player.setScorePerRound(averagePerRound);
+        double averagePerDart = (((Integer.parseInt(gameType) - player.getPointRemaining()) / round) / 3.0);
+        String avgPerDart = new DecimalFormat("0.#").format(averagePerDart);
+        player.setScorePerDart(Double.parseDouble(avgPerDart));
+        double averagePerRound = averagePerDart * 3.0;
+        String avgPerRound = new DecimalFormat("0.#").format(averagePerRound);
+        player.setScorePerRound(Double.parseDouble(avgPerRound));
     }
 
 }
