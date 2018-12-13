@@ -20,8 +20,8 @@ public class Turn extends HttpServlet {
         HttpSession session = req.getSession(false);
 
         Game game = (Game) session.getAttribute("game");
-        int actualLeg = Integer.parseInt(req.getParameter("actualLeg"));
-        int highestTurn = Integer.parseInt(req.getParameter("highestTurn"));
+//        int actualLeg = Integer.parseInt(req.getParameter("actualLeg"));
+//        int highestTurn = Integer.parseInt(req.getParameter("highestTurn"));
         int numberOfDoubles = Integer.parseInt(req.getParameter("numberOfDoubles"));
         int numberOfTriples = Integer.parseInt(req.getParameter("numberOfTriples"));
 
@@ -29,17 +29,17 @@ public class Turn extends HttpServlet {
         int actualScore = Integer.parseInt(req.getParameter("actualScore"));
         int bestOfThree = Integer.parseInt(req.getParameter("bestOfThree"));
         int pointRemaining = Integer.parseInt(req.getParameter("pointRemaining"));
-        int legsWon = Integer.parseInt(req.getParameter("legsWon"));
+//        int legsWon = Integer.parseInt(req.getParameter("legsWon"));
 
-        game.setActualLeg(actualLeg);
-        game.setHighestTurn(highestTurn);
+//        game.setActualLeg(actualLeg);
+//        game.setHighestTurn(highestTurn);
         game.setNumberOfDoubles(numberOfDoubles);
         game.setNumberOfTriples(numberOfTriples);
 
         actualPlayer.setActualScore(actualScore);
         actualPlayer.setBestOfThree(bestOfThree);
         actualPlayer.setPointRemaining(pointRemaining);
-        actualPlayer.setLegsWon(legsWon);
+//        actualPlayer.setLegsWon(legsWon);
 
         game.setAverage(actualPlayer);
 
