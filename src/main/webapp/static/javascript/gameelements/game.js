@@ -107,7 +107,7 @@ let game = {
             } else {
                 game._actualPlayer = "p1";
                 game._round++;
-                document.getElementById("game-round").innerText = game._round;
+                document.getElementById("game-round").innerText ="Round " + game._round;
                 document.getElementById("p2-nameH1").style.color = "white";
                 document.getElementById("p1-nameH1").style.color = "rgb(79, 153, 98)";
                 game.revertTurnStats();
@@ -143,7 +143,7 @@ let game = {
         document.getElementById("p2-bestOf").innerText = game._p2HighestTurn;
         document.getElementById("p1-score").innerText = game._pointRemaining;
         document.getElementById("p2-score").innerText = game._pointRemaining;
-        document.getElementById("game-round").innerText = "Round: " + game._round;
+        document.getElementById("game-round").innerText = "Round " + game._round;
         document.getElementById("p1-avgperdart").innerText = game._avgPerDart;
         document.getElementById("p1-avgperround").innerText = game._avgPerRound;
         document.getElementById("p2-avgperdart").innerText = game._avgPerDart;
