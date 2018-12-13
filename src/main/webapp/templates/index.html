@@ -8,7 +8,7 @@
     <title>Dart Vaders</title>
 
     <!-- font awesome -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/css/bootstrap/fontAwesome.css" rel="stylesheet">
     <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"-->
     <!--integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">-->
     <!-- own js -->
@@ -20,20 +20,20 @@
 
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    <link rel="stylesheet" href="/static/css/bootstrap/bootstrap4.1.3.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+    <link rel="stylesheet" href="/static/css/bootstrap/bootstrapTheme.css"
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.js"
+    <script src="/static/javascript/resource/jquery.js"></script>
+    <script src="/static/javascript/resource/jquery2.js"
             integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
             crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    <script src="/static/javascript/resource/popper.js"
             integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"
             defer></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    <script src="/static/javascript/resource/bootstrap.js"
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"
             defer></script>
 
@@ -45,13 +45,20 @@
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-dark text-white">
         <a class="navbar-brand" href="/"><img id="darts-logo" src="/static/images/dartsicon.png" alt="dartsicon"></a>
+
+        <div th:if="${session.game != null}" class="navbar-nav mr-auto">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item" th:text="'Leg ' + ${game.getActualLeg()}">1</li>
+                <li class="nav-item" id="game-round" th:text="'Round ' + ${game.getRound()}">2</li>
+            </ul>
+        </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="#" data-toggle="modal" data-target="#modalLoginForm">New Game</a>
                 </li>
@@ -70,13 +77,13 @@
         </div>
     </nav>
 
-    <div th:if="${session.game != null}" class="row align-items-center justify-content-center board-row">
-        <div><h1
-                th:text="'Leg ' + ${game.getActualLeg()}">1</h1>
-            <br/>
-            <h3 id="game-round" th:text="'Round ' + ${game.getRound()}">2</h3>
-        </div>
-    </div>
+    <!--<div class="row align-items-center justify-content-center board-row">-->
+    <!--<div><h1-->
+    <!--th:text="'Leg ' + ${game.getActualLeg()}">1</h1>-->
+    <!--<br/>-->
+    <!--<h3 id="game-round" th:text="'Round ' + ${game.getRound()}">2</h3>-->
+    <!--</div>-->
+    <!--</div>-->
 
 
     <div class="row align-items-center justify-content-center board-row">
@@ -245,8 +252,8 @@
             <div><h2 id="p2-score" th:text="${playertwo.getPointRemaining()}">501</h2></div>
             <div><h3 id="p2-bestOf" th:text="'Best of three: ' + ${playertwo.getBestOfThree()}">0</h3></div>
             <div><h3 id="p2-actualRound" th:text="'Actual round: ' + ${playertwo.getActualScore()}">0</h3></div>
-            <div><h4 th:text="'Average per dart: ' + ${playerone.getScorePerDart()}"></h4></div>
-            <div><h4 th:text="'Average per round: ' + ${playerone.getScorePerRound()}"></h4></div>
+            <div><h4 th:text="'Average per dart: ' + ${playertwo.getScorePerDart()}"></h4></div>
+            <div><h4 th:text="'Average per round: ' + ${playertwo.getScorePerRound()}"></h4></div>
         </div>
     </div>
 </div>

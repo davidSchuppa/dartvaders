@@ -78,6 +78,12 @@ a.dropdown-item {
     color: black;
 }
 
+@media (min-width: 992px){
+    .navbar li {
+        margin-left : 1em;
+        margin-right : 1em;
+    }
+}
 /*.navbar-dark .navbar-toggler-icon {*/
     /*background-image: url("data:image/svg+xml;..");*/
 /*}*/
