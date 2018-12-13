@@ -14,7 +14,6 @@ public class Game {
     private List<Player> players = new ArrayList<>();
     private int numberOfDoubles = 0;
     private int numberOfTriples = 0;
-    private int highestTurn;
     private Player winner;
     private String gameType;
     private int actualLeg = 1;
@@ -70,7 +69,7 @@ public class Game {
         }
     }
 
-    private void setWinner(Player player) {
+    public void setWinner(Player player) {
         winner = player;
     }
 
@@ -90,11 +89,6 @@ public class Game {
         this.actualLeg = actualLeg;
     }
 
-    public void setHighestTurn(int highestTurn) {
-        this.highestTurn = highestTurn;
-    }
-
-
     public void setNumberOfDoubles(int numberOfDoubles) {
         this.numberOfDoubles = numberOfDoubles;
     }
@@ -112,4 +106,21 @@ public class Game {
         player.setScorePerRound(Double.parseDouble(avgPerRound));
     }
 
+    public void setRound(int round) {
+        this.round = round;
+    }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "legs=" + legs +
+                ", round=" + round +
+                ", players=" + players +
+                ", numberOfDoubles=" + numberOfDoubles +
+                ", numberOfTriples=" + numberOfTriples +
+                ", winner=" + winner +
+                ", gameType='" + gameType + '\'' +
+                ", actualLeg=" + actualLeg +
+                '}';
+    }
 }
