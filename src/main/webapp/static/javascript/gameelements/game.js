@@ -181,12 +181,14 @@ let game = {
             game._winner = playerName;
         }
         $.post('/turn', {
+            round: game._round,
             player: playerName,
             actualScore: game._turnScore,
             bestOfThree: bestOfThree,
             pointRemaining: game._pointRemaining,
             numberOfDoubles: game._doubles,
             numberOfTriples: game._triples,
+            winner: game._winner
         })
     }
 
