@@ -46,14 +46,19 @@ let game = {
         let playerOriginalScore = parseInt(document.getElementById(game._actualPlayer + "-score").innerText);
         let playerScoreDiv = document.getElementById(game._actualPlayer + "-score");
         let playerActualScore = document.getElementById(game._actualPlayer + "-actualRound");
-        if (game.isThrowValid(playerOriginalScore, score)) {
+        if (game.isThrowValid(playerOriginalScore, score, event)) {
             game._turnScore += score;
             playerActualScore.innerText = game._turnScore;
             console.log("Turn score: " + game._turnScore);
             game._pointRemaining = playerOriginalScore - score;
             playerScoreDiv.innerText = game._pointRemaining;
+            if (game._turnCounter == 3) {
+                game._round = parseInt(document.getElementById("game-round").innerText.substr(5));
+                game.saveStats();
+            }
             if (game._pointRemaining === 0) {
                 if (game.checkWin(event)) {
+                    game.saveStats();
                     game.win();
                 } else {
                     game._pointRemaining = playerOriginalScore;
@@ -68,8 +73,9 @@ let game = {
         // console.log("P2 highest turn: " + game._p2HighestTurn);
     },
 
-    isThrowValid: function (originalPoints, throwScore) {
-        return (originalPoints - throwScore) >= 2 || (originalPoints - throwScore == 0);
+    isThrowValid: function (originalPoints, throwScore, event) {
+        let id = board.getId(event);
+        return (originalPoints - throwScore) >= 2 || ((originalPoints - throwScore == 0) && (id[0] == 'd'));
     },
 
     win: function () {
@@ -95,10 +101,9 @@ let game = {
     },
 
     changePlayer: function (originalScore, score) {
-        if (game._turnCounter === 3 || !game.isThrowValid(originalScore, score)) {
-            game._round = parseInt(document.getElementById("game-round").innerText.substr(6));
+        if (game._turnCounter === 3 || !game.isThrowValid(originalScore, score, event)) {
+            game._round = parseInt(document.getElementById("game-round").innerText.substr(5));
             game.calculateAndSetAverage();
-            game.saveStats();
             if (game._actualPlayer === "p1") {
                 game._actualPlayer = "p2";
                 document.getElementById("p1-nameH1").style.color = "white";
@@ -107,7 +112,7 @@ let game = {
             } else {
                 game._actualPlayer = "p1";
                 game._round++;
-                document.getElementById("game-round").innerText = "Round: " + game._round;
+                document.getElementById("game-round").innerText = "Round " + game._round;
                 document.getElementById("p2-nameH1").style.color = "white";
                 document.getElementById("p1-nameH1").style.color = "rgb(79, 153, 98)";
                 game.revertTurnStats();
@@ -118,7 +123,7 @@ let game = {
     calculateAndSetAverage: function () {
         let playerOriginalAvgPerDart = document.getElementById(game._actualPlayer + "-avgperdart");
         let playerOriginalAvgPerRound = document.getElementById(game._actualPlayer + "-avgperround");
-        game._avgPerDart = (((document.getElementById("gametype").value - game._pointRemaining) * 1.0 / game._round )/3).toFixed(1);
+        game._avgPerDart = (((document.getElementById("gametype").value - game._pointRemaining) * 1.0 / game._round) / 3).toFixed(1);
         game._avgPerRound = (game._avgPerDart * 3).toFixed(1);
         playerOriginalAvgPerDart.innerText = game._avgPerDart;
         playerOriginalAvgPerRound.innerText = game._avgPerRound;
@@ -130,7 +135,7 @@ let game = {
         game._turnScore = 0;
     },
 
-    newGame: function() {
+    newGame: function () {
         game._pointRemaining = document.getElementById("gametype").value;
         game._turnCounter = 0;
         game._turnScore = 0;
@@ -143,7 +148,7 @@ let game = {
         document.getElementById("p2-bestOf").innerText = game._p2HighestTurn;
         document.getElementById("p1-score").innerText = game._pointRemaining;
         document.getElementById("p2-score").innerText = game._pointRemaining;
-        document.getElementById("game-round").innerText = "Round: " + game._round;
+        document.getElementById("game-round").innerText = "Round " + game._round;
         document.getElementById("p1-avgperdart").innerText = game._avgPerDart;
         document.getElementById("p1-avgperround").innerText = game._avgPerRound;
         document.getElementById("p2-avgperdart").innerText = game._avgPerDart;
