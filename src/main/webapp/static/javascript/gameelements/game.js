@@ -93,6 +93,7 @@ let game = {
 
     changePlayer: function (originalScore, score) {
         if (game._turnCounter === 3 || !game.isThrowValid(originalScore, score)) {
+            game.saveStats();
             if (game._actualPlayer === "p1") {
                 game._actualPlayer = "p2";
                 document.getElementById("p1-nameH1").style.color = "white";
@@ -129,7 +130,26 @@ let game = {
                 p2bestOfThree.innerText = "Best of three: " + game._p2HighestTurn;
             }
         }
+    },
+
+    saveStats: function () {
+        let playerName = document.getElementById(game._actualPlayer + "-nameH1").innerText;
+        let bestOfThree;
+        if (game._actualPlayer == "p1") {
+            bestOfThree = game._p1HighestTurn;
+        } else {
+            bestOfThree = game._p2HighestTurn;
+        }
+        $.post('/turn', {
+            player: playerName,
+            actualScore: game._turnScore,
+            bestOfThree: bestOfThree,
+            pointRemaining: game._pointRemaining,
+            numberOfDoubles: game._doubles,
+            numberOfTriples: game._triples
+        })
     }
+
 
     //TODO
     /**Send to java parameters called:
