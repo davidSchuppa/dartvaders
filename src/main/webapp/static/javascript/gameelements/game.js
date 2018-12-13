@@ -1,5 +1,4 @@
 let game = {
-    _clickCounter: 0,
     _doubles: 0,
     _triples: 0,
     _leg: 1,
@@ -41,9 +40,8 @@ let game = {
     },
 
     registerTurn: function (score, event) {
-        game._clickCounter++;
         game._turnCounter++;
-        console.log("turn counter: " + game._turnCounter);
+        // console.log("turn counter: " + game._turnCounter);
 
         let playerOriginalScore = parseInt(document.getElementById(game._actualPlayer + "-score").innerText);
         let playerScoreDiv = document.getElementById(game._actualPlayer + "-score");
@@ -109,7 +107,7 @@ let game = {
             } else {
                 game._actualPlayer = "p1";
                 game._round++;
-                document.getElementById("game-round").innerText = "Round: " + game._round;
+                document.getElementById("game-round").innerText = game._round;
                 document.getElementById("p2-nameH1").style.color = "white";
                 document.getElementById("p1-nameH1").style.color = "rgb(79, 153, 98)";
                 game.revertTurnStats();
